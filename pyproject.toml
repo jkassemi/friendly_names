@@ -69,3 +69,52 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.hatch.envs.lint]
+dependencies = [
+  "black>=23.0.0",
+  "ruff>=0.1.0",
+]
+
+[tool.hatch.envs.lint.scripts]
+style = [
+  "ruff check {args:.}",
+  "ruff format --check {args:.}",
+]
+fmt = [
+  "ruff check --fix {args:.}",
+  "ruff format {args:.}",
+]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+select = [
+  "A",    # flake8-builtins
+  "B",    # flake8-bugbear
+  "C",    # flake8-comprehensions
+  "E",    # pycodestyle errors
+  "F",    # pyflakes
+  "I",    # isort
+  "N",    # pep8-naming
+  "Q",    # flake8-quotes
+  "RUF",  # ruff-specific rules
+  "S",    # flake8-bandit
+  "T",    # flake8-print
+  "UP",   # pyupgrade
+  "W",    # pycodestyle warnings
+]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.ruff.lint.isort]
+known-first-party = ["friendly_names"]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "double"

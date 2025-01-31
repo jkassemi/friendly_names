@@ -54,12 +54,20 @@ hatch run test:coverage
 
 # Run type checking
 hatch run types:check
+
+# Check code style
+hatch run lint:style
+
+# Format code
+hatch run lint:fmt
 ```
 
 The project uses:
 - [Hatch](https://hatch.pypa.io/) for development environment and build management
 - [pytest](https://docs.pytest.org/) for testing
 - [mypy](https://mypy.readthedocs.io/) for type checking
+- [Ruff](https://docs.astral.sh/ruff/) for linting and formatting
+- [Black](https://black.readthedocs.io/) style rules (via Ruff)
 
 ## License
 
