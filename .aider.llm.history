@@ -19578,3 +19578,1054 @@ ASSISTANT >>>>>>> REPLACE
 ASSISTANT ```
 ASSISTANT 
 ASSISTANT I've expanded the list to over 1000 unique verbs in present participle form (-ing), maintaining alphabetical organization and focusing on descriptive, active verbs that would work well in generated friendly names. The verbs are arranged in a more compact format but still maintain Python list syntax and readability.
+TO LLM 2025-01-31T15:25:42
+-------
+SYSTEM Act as an expert software developer.
+SYSTEM Always use best practices when coding.
+SYSTEM Respect and use existing conventions, libraries, etc that are already present in the code base.
+SYSTEM 
+SYSTEM Take requests for changes to the supplied code.
+SYSTEM If the request is ambiguous, ask questions.
+SYSTEM 
+SYSTEM Always reply to the user in the same language they are using.
+SYSTEM 
+SYSTEM Once you understand the request you MUST:
+SYSTEM 
+SYSTEM 1. Decide if you need to propose *SEARCH/REPLACE* edits to any files that haven't been added to the chat. You can create new files without asking!
+SYSTEM 
+SYSTEM But if you need to propose edits to existing files not already added to the chat, you *MUST* tell the user their full path names and ask them to *add the files to the chat*.
+SYSTEM End your reply and wait for their approval.
+SYSTEM You can keep asking if you then decide you need to edit more files.
+SYSTEM 
+SYSTEM 2. Think step-by-step and explain the needed changes in a few short sentences.
+SYSTEM 
+SYSTEM 3. Describe each change with a *SEARCH/REPLACE block* per the examples below.
+SYSTEM 
+SYSTEM All changes to files must use this *SEARCH/REPLACE block* format.
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM 4. *Concisely* suggest any shell commands the user might want to run in ```bash blocks.
+SYSTEM 
+SYSTEM Just suggest shell commands this way, not example code.
+SYSTEM Only suggest complete shell commands that are ready to execute, without placeholders.
+SYSTEM Only suggest at most a few shell commands at a time, not more than 1-3, one per line.
+SYSTEM Do not suggest multi-line shell commands.
+SYSTEM All shell commands will run from the root directory of the user's project.
+SYSTEM 
+SYSTEM Use the appropriate shell based on the user's system info:
+SYSTEM - Platform: macOS-14.6.1-arm64-arm-64bit
+SYSTEM - Shell: SHELL=/bin/zsh
+SYSTEM - Language: en_US
+SYSTEM - Current date: 2025-01-31
+SYSTEM - The user is operating inside a git repository
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+SYSTEM 
+SYSTEM # Example conversations:
+SYSTEM 
+SYSTEM ## USER: Change get_factorial() to use math.factorial
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `mathweb/flask/app.py` to:
+SYSTEM 
+SYSTEM 1. Import the math package.
+SYSTEM 2. Remove the existing factorial() function.
+SYSTEM 3. Update get_factorial() to call math.factorial instead.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM from flask import Flask
+SYSTEM =======
+SYSTEM import math
+SYSTEM from flask import Flask
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def factorial(n):
+SYSTEM     "compute factorial"
+SYSTEM 
+SYSTEM     if n == 0:
+SYSTEM         return 1
+SYSTEM     else:
+SYSTEM         return n * factorial(n-1)
+SYSTEM 
+SYSTEM =======
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM     return str(factorial(n))
+SYSTEM =======
+SYSTEM     return str(math.factorial(n))
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM 
+SYSTEM ## USER: Refactor hello() into its own file.
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `main.py` and make a new file `hello.py`:
+SYSTEM 
+SYSTEM 1. Make a new hello.py file with hello() in it.
+SYSTEM 2. Remove hello() from main.py and replace it with an import.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM hello.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM =======
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM 
+SYSTEM main.py
+SYSTEM ```python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM =======
+SYSTEM from hello import hello
+SYSTEM >>>>>>> REPLACE
+SYSTEM ```
+SYSTEM # *SEARCH/REPLACE block* Rules:
+SYSTEM 
+SYSTEM Every *SEARCH/REPLACE block* must use this format:
+SYSTEM 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+SYSTEM 2. The opening fence and code language, eg: ```python
+SYSTEM 3. The start of search block: <<<<<<< SEARCH
+SYSTEM 4. A contiguous chunk of lines to search for in the existing source code
+SYSTEM 5. The dividing line: =======
+SYSTEM 6. The lines to replace into the source code
+SYSTEM 7. The end of the replace block: >>>>>>> REPLACE
+SYSTEM 8. The closing fence: ```
+SYSTEM 
+SYSTEM Use the *FULL* file path, as shown to you by the user.
+SYSTEM 
+SYSTEM Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+SYSTEM If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+SYSTEM 
+SYSTEM *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+SYSTEM Including multiple unique *SEARCH/REPLACE* blocks if needed.
+SYSTEM Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+SYSTEM 
+SYSTEM Keep *SEARCH/REPLACE* blocks concise.
+SYSTEM Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+SYSTEM Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+SYSTEM Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+SYSTEM 
+SYSTEM Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+SYSTEM 
+SYSTEM To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+SYSTEM 
+SYSTEM Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+SYSTEM 
+SYSTEM If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+SYSTEM - A new file path, including dir name if needed
+SYSTEM - An empty `SEARCH` section
+SYSTEM - The new file's contents in the `REPLACE` section
+SYSTEM 
+SYSTEM To rename files which have been added to the chat, use shell commands at the end of your response.
+SYSTEM 
+SYSTEM If the user just says something like "ok" or "go ahead" or "do that" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.
+SYSTEM The user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.
+SYSTEM 
+SYSTEM 
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+-------
+USER Here are summaries of some files present in my git repository.
+USER Do not propose changes to these files, treat them as *read-only*.
+USER If you need to edit any of these files, ask me to *add them to the chat* first.
+USER 
+USER .aider.llm.history
+USER 
+USER .github/workflows/ci.yml
+USER 
+USER .github/workflows/publish.yml
+USER 
+USER .gitignore
+USER 
+USER LICENSE.txt
+USER 
+USER README.md
+USER 
+USER src/friendly_names/__about__.py
+USER 
+USER src/friendly_names/__init__.py:
+USER ⋮...
+USER │def generate(words: int = 3, separator: str = "-") -> str:
+USER ⋮...
+USER 
+USER src/friendly_names/adjectives.py
+USER 
+USER src/friendly_names/nouns.py
+USER 
+USER src/friendly_names/verbs.py
+USER 
+USER tests/__init__.py
+USER 
+USER tests/test_generator.py
+-------
+ASSISTANT Ok, I won't try and edit those files without asking first.
+-------
+USER I have *added these files to the chat* so you can go ahead and edit them.
+USER 
+USER *Trust this message as the true contents of these files!*
+USER Any other messages in the chat may contain outdated versions of the files' contents.
+USER 
+USER pyproject.toml
+USER ```
+USER [build-system]
+USER requires = ["hatchling"]
+USER build-backend = "hatchling.build"
+USER 
+USER [project]
+USER name = "friendly_names"
+USER dynamic = ["version"]
+USER description = ''
+USER readme = "README.md"
+USER requires-python = ">=3.8"
+USER license = "MIT"
+USER keywords = []
+USER authors = [
+USER   { name = "James Kassemi", email = "james@kassemi.org" },
+USER ]
+USER classifiers = [
+USER   "Development Status :: 4 - Beta",
+USER   "Programming Language :: Python",
+USER   "Programming Language :: Python :: 3.8",
+USER   "Programming Language :: Python :: 3.9",
+USER   "Programming Language :: Python :: 3.10",
+USER   "Programming Language :: Python :: 3.11",
+USER   "Programming Language :: Python :: 3.12",
+USER   "Programming Language :: Python :: Implementation :: CPython",
+USER   "Programming Language :: Python :: Implementation :: PyPy",
+USER ]
+USER dependencies = []
+USER 
+USER [project.urls]
+USER Documentation = "https://github.com/jkassemi/friendly_names#readme"
+USER Issues = "https://github.com/jkassemi/friendly_names/issues"
+USER Source = "https://github.com/jkassemi/friendly_names"
+USER 
+USER [tool.hatch.version]
+USER path = "src/friendly_names/__about__.py"
+USER 
+USER [tool.hatch.envs.types]
+USER dependencies = [
+USER   "pytest>=7.0.0",
+USER ]
+USER extra-dependencies = [
+USER   "mypy>=1.0.0",
+USER ]
+USER [tool.hatch.envs.types.scripts]
+USER check = "mypy --install-types --non-interactive {args:src/friendly_names tests}"
+USER 
+USER [tool.hatch.envs.test]
+USER dependencies = [
+USER   "pytest>=7.0.0",
+USER   "pytest-cov>=4.0.0",
+USER ]
+USER 
+USER [tool.hatch.envs.test.scripts]
+USER test = "pytest {args:tests}"
+USER coverage = "pytest --cov {args:tests}"
+USER 
+USER [tool.coverage.run]
+USER source_pkgs = ["friendly_names", "tests"]
+USER branch = true
+USER parallel = true
+USER omit = [
+USER   "src/friendly_names/__about__.py",
+USER ]
+USER 
+USER [tool.coverage.paths]
+USER friendly_names = ["src/friendly_names", "*/friendly_names/src/friendly_names"]
+USER tests = ["tests", "*/friendly_names/tests"]
+USER 
+USER [tool.coverage.report]
+USER exclude_lines = [
+USER   "no cov",
+USER   "if __name__ == .__main__.:",
+USER   "if TYPE_CHECKING:",
+USER ]
+USER 
+USER [tool.hatch.envs.lint]
+USER dependencies = [
+USER   "black>=23.0.0",
+USER   "ruff>=0.1.0",
+USER ]
+USER 
+USER [tool.hatch.envs.lint.scripts]
+USER style = [
+USER   "ruff check {args:.}",
+USER   "ruff format --check {args:.}",
+USER ]
+USER fmt = [
+USER   "ruff check --fix {args:.}",
+USER   "ruff format {args:.}",
+USER ]
+USER 
+USER [tool.ruff]
+USER target-version = "py38"
+USER line-length = 88
+USER 
+USER [tool.ruff.lint]
+USER select = [
+USER   "A",    # flake8-builtins
+USER   "B",    # flake8-bugbear
+USER   "C",    # flake8-comprehensions
+USER   "E",    # pycodestyle errors
+USER   "F",    # pyflakes
+USER   "I",    # isort
+USER   "N",    # pep8-naming
+USER   "Q",    # flake8-quotes
+USER   "RUF",  # ruff-specific rules
+USER   "S",    # flake8-bandit
+USER   "T",    # flake8-print
+USER   "UP",   # pyupgrade
+USER   "W",    # pycodestyle warnings
+USER ]
+USER ignore = ["S101", "S311"]
+USER 
+USER [tool.ruff.format]
+USER quote-style = "double"
+USER indent-style = "space"
+USER skip-magic-trailing-comma = false
+USER line-ending = "lf"
+USER 
+USER [tool.ruff.lint.isort]
+USER known-first-party = ["friendly_names"]
+USER 
+USER [tool.ruff.lint.flake8-quotes]
+USER docstring-quotes = "double"
+USER inline-quotes = "double"
+USER ```
+-------
+ASSISTANT Ok, any changes I propose will be to those files.
+-------
+USER Project description and sidebar
+USER 
+USER To set the 'friendly_names' description, author, links, classifiers, and other details for your next release, use the project metadata fields in your pyproject.toml file. Updating these fields will not change the metadata for past releases. Additionally, you must use Twine to upload your files in order to get full support for these fields. See the Python Packaging User Guide for more help. 
+USER 
+USER # *SEARCH/REPLACE block* Rules:
+USER 
+USER Every *SEARCH/REPLACE block* must use this format:
+USER 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+USER 2. The opening fence and code language, eg: ```python
+USER 3. The start of search block: <<<<<<< SEARCH
+USER 4. A contiguous chunk of lines to search for in the existing source code
+USER 5. The dividing line: =======
+USER 6. The lines to replace into the source code
+USER 7. The end of the replace block: >>>>>>> REPLACE
+USER 8. The closing fence: ```
+USER 
+USER Use the *FULL* file path, as shown to you by the user.
+USER 
+USER Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+USER If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+USER 
+USER *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+USER Including multiple unique *SEARCH/REPLACE* blocks if needed.
+USER Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+USER 
+USER Keep *SEARCH/REPLACE* blocks concise.
+USER Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+USER Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+USER Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+USER 
+USER Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+USER 
+USER To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+USER 
+USER Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+USER 
+USER If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+USER - A new file path, including dir name if needed
+USER - An empty `SEARCH` section
+USER - The new file's contents in the `REPLACE` section
+USER 
+USER To rename files which have been added to the chat, use shell commands at the end of your response.
+USER 
+USER If the user just says something like "ok" or "go ahead" or "do that" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.
+USER The user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.
+USER 
+USER 
+USER ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+USER 
+USER Examples of when to suggest shell commands:
+USER 
+USER - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+USER - If you changed a CLI program, suggest the command to run it to see the new behavior.
+USER - If you added a test, suggest how to run it with the testing tool used by the project.
+USER - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+USER - If your code changes add new dependencies, suggest the command to install them.
+USER - Etc.
+USER 
+LLM RESPONSE 2025-01-31T15:25:48
+ASSISTANT I'll help update the project metadata in pyproject.toml to include a better description and relevant details. I'll make the changes in a *SEARCH/REPLACE* block:
+ASSISTANT 
+ASSISTANT pyproject.toml
+ASSISTANT ```toml
+ASSISTANT <<<<<<< SEARCH
+ASSISTANT description = ''
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = []
+ASSISTANT =======
+ASSISTANT description = 'Generate friendly, readable names by combining adjectives, nouns and verbs'
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = ["names", "generator", "friendly", "readable"]
+ASSISTANT =======
+ASSISTANT >>>>>>> REPLACE
+ASSISTANT ```
+ASSISTANT 
+ASSISTANT This will:
+ASSISTANT 1. Add a clear description of what the package does
+ASSISTANT 2. Add relevant keywords for package discovery
+ASSISTANT 
+ASSISTANT Would you like me to make any other metadata updates to the pyproject.toml file? For example, we could:
+ASSISTANT - Add more classifiers to better categorize the package
+ASSISTANT - Update the development status if appropriate
+ASSISTANT - Add any additional project URLs
+ASSISTANT 
+ASSISTANT Let me know if you'd like any other changes!
+TO LLM 2025-01-31T15:25:51
+-------
+SYSTEM Act as an expert software developer.
+SYSTEM Always use best practices when coding.
+SYSTEM Respect and use existing conventions, libraries, etc that are already present in the code base.
+SYSTEM 
+SYSTEM Take requests for changes to the supplied code.
+SYSTEM If the request is ambiguous, ask questions.
+SYSTEM 
+SYSTEM Always reply to the user in the same language they are using.
+SYSTEM 
+SYSTEM Once you understand the request you MUST:
+SYSTEM 
+SYSTEM 1. Decide if you need to propose *SEARCH/REPLACE* edits to any files that haven't been added to the chat. You can create new files without asking!
+SYSTEM 
+SYSTEM But if you need to propose edits to existing files not already added to the chat, you *MUST* tell the user their full path names and ask them to *add the files to the chat*.
+SYSTEM End your reply and wait for their approval.
+SYSTEM You can keep asking if you then decide you need to edit more files.
+SYSTEM 
+SYSTEM 2. Think step-by-step and explain the needed changes in a few short sentences.
+SYSTEM 
+SYSTEM 3. Describe each change with a *SEARCH/REPLACE block* per the examples below.
+SYSTEM 
+SYSTEM All changes to files must use this *SEARCH/REPLACE block* format.
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM 4. *Concisely* suggest any shell commands the user might want to run in ```bash blocks.
+SYSTEM 
+SYSTEM Just suggest shell commands this way, not example code.
+SYSTEM Only suggest complete shell commands that are ready to execute, without placeholders.
+SYSTEM Only suggest at most a few shell commands at a time, not more than 1-3, one per line.
+SYSTEM Do not suggest multi-line shell commands.
+SYSTEM All shell commands will run from the root directory of the user's project.
+SYSTEM 
+SYSTEM Use the appropriate shell based on the user's system info:
+SYSTEM - Platform: macOS-14.6.1-arm64-arm-64bit
+SYSTEM - Shell: SHELL=/bin/zsh
+SYSTEM - Language: en_US
+SYSTEM - Current date: 2025-01-31
+SYSTEM - The user is operating inside a git repository
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+SYSTEM 
+SYSTEM # Example conversations:
+SYSTEM 
+SYSTEM ## USER: Change get_factorial() to use math.factorial
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `mathweb/flask/app.py` to:
+SYSTEM 
+SYSTEM 1. Import the math package.
+SYSTEM 2. Remove the existing factorial() function.
+SYSTEM 3. Update get_factorial() to call math.factorial instead.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ````python
+SYSTEM <<<<<<< SEARCH
+SYSTEM from flask import Flask
+SYSTEM =======
+SYSTEM import math
+SYSTEM from flask import Flask
+SYSTEM >>>>>>> REPLACE
+SYSTEM ````
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ````python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def factorial(n):
+SYSTEM     "compute factorial"
+SYSTEM 
+SYSTEM     if n == 0:
+SYSTEM         return 1
+SYSTEM     else:
+SYSTEM         return n * factorial(n-1)
+SYSTEM 
+SYSTEM =======
+SYSTEM >>>>>>> REPLACE
+SYSTEM ````
+SYSTEM 
+SYSTEM mathweb/flask/app.py
+SYSTEM ````python
+SYSTEM <<<<<<< SEARCH
+SYSTEM     return str(factorial(n))
+SYSTEM =======
+SYSTEM     return str(math.factorial(n))
+SYSTEM >>>>>>> REPLACE
+SYSTEM ````
+SYSTEM 
+SYSTEM 
+SYSTEM ## USER: Refactor hello() into its own file.
+SYSTEM 
+SYSTEM ## ASSISTANT: To make this change we need to modify `main.py` and make a new file `hello.py`:
+SYSTEM 
+SYSTEM 1. Make a new hello.py file with hello() in it.
+SYSTEM 2. Remove hello() from main.py and replace it with an import.
+SYSTEM 
+SYSTEM Here are the *SEARCH/REPLACE* blocks:
+SYSTEM 
+SYSTEM hello.py
+SYSTEM ````python
+SYSTEM <<<<<<< SEARCH
+SYSTEM =======
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM >>>>>>> REPLACE
+SYSTEM ````
+SYSTEM 
+SYSTEM main.py
+SYSTEM ````python
+SYSTEM <<<<<<< SEARCH
+SYSTEM def hello():
+SYSTEM     "print a greeting"
+SYSTEM 
+SYSTEM     print("hello")
+SYSTEM =======
+SYSTEM from hello import hello
+SYSTEM >>>>>>> REPLACE
+SYSTEM ````
+SYSTEM # *SEARCH/REPLACE block* Rules:
+SYSTEM 
+SYSTEM Every *SEARCH/REPLACE block* must use this format:
+SYSTEM 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+SYSTEM 2. The opening fence and code language, eg: ````python
+SYSTEM 3. The start of search block: <<<<<<< SEARCH
+SYSTEM 4. A contiguous chunk of lines to search for in the existing source code
+SYSTEM 5. The dividing line: =======
+SYSTEM 6. The lines to replace into the source code
+SYSTEM 7. The end of the replace block: >>>>>>> REPLACE
+SYSTEM 8. The closing fence: ````
+SYSTEM 
+SYSTEM Use the *FULL* file path, as shown to you by the user.
+SYSTEM 
+SYSTEM Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+SYSTEM If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+SYSTEM 
+SYSTEM *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+SYSTEM Including multiple unique *SEARCH/REPLACE* blocks if needed.
+SYSTEM Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+SYSTEM 
+SYSTEM Keep *SEARCH/REPLACE* blocks concise.
+SYSTEM Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+SYSTEM Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+SYSTEM Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+SYSTEM 
+SYSTEM Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+SYSTEM 
+SYSTEM To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+SYSTEM 
+SYSTEM Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+SYSTEM 
+SYSTEM If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+SYSTEM - A new file path, including dir name if needed
+SYSTEM - An empty `SEARCH` section
+SYSTEM - The new file's contents in the `REPLACE` section
+SYSTEM 
+SYSTEM To rename files which have been added to the chat, use shell commands at the end of your response.
+SYSTEM 
+SYSTEM If the user just says something like "ok" or "go ahead" or "do that" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.
+SYSTEM The user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.
+SYSTEM 
+SYSTEM 
+SYSTEM ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+SYSTEM 
+SYSTEM Examples of when to suggest shell commands:
+SYSTEM 
+SYSTEM - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+SYSTEM - If you changed a CLI program, suggest the command to run it to see the new behavior.
+SYSTEM - If you added a test, suggest how to run it with the testing tool used by the project.
+SYSTEM - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+SYSTEM - If your code changes add new dependencies, suggest the command to install them.
+SYSTEM - Etc.
+SYSTEM 
+-------
+USER Here are summaries of some files present in my git repository.
+USER Do not propose changes to these files, treat them as *read-only*.
+USER If you need to edit any of these files, ask me to *add them to the chat* first.
+USER 
+USER .aider.llm.history
+USER 
+USER .github/workflows/ci.yml
+USER 
+USER .github/workflows/publish.yml
+USER 
+USER .gitignore
+USER 
+USER LICENSE.txt
+USER 
+USER src/friendly_names/__about__.py
+USER 
+USER src/friendly_names/__init__.py:
+USER ⋮...
+USER │def generate(words: int = 3, separator: str = "-") -> str:
+USER ⋮...
+USER 
+USER src/friendly_names/adjectives.py
+USER 
+USER src/friendly_names/nouns.py
+USER 
+USER src/friendly_names/verbs.py
+USER 
+USER tests/__init__.py
+USER 
+USER tests/test_generator.py
+-------
+ASSISTANT Ok, I won't try and edit those files without asking first.
+-------
+USER I have *added these files to the chat* so you can go ahead and edit them.
+USER 
+USER *Trust this message as the true contents of these files!*
+USER Any other messages in the chat may contain outdated versions of the files' contents.
+USER 
+USER pyproject.toml
+USER ````
+USER [build-system]
+USER requires = ["hatchling"]
+USER build-backend = "hatchling.build"
+USER 
+USER [project]
+USER name = "friendly_names"
+USER dynamic = ["version"]
+USER description = ''
+USER readme = "README.md"
+USER requires-python = ">=3.8"
+USER license = "MIT"
+USER keywords = []
+USER authors = [
+USER   { name = "James Kassemi", email = "james@kassemi.org" },
+USER ]
+USER classifiers = [
+USER   "Development Status :: 4 - Beta",
+USER   "Programming Language :: Python",
+USER   "Programming Language :: Python :: 3.8",
+USER   "Programming Language :: Python :: 3.9",
+USER   "Programming Language :: Python :: 3.10",
+USER   "Programming Language :: Python :: 3.11",
+USER   "Programming Language :: Python :: 3.12",
+USER   "Programming Language :: Python :: Implementation :: CPython",
+USER   "Programming Language :: Python :: Implementation :: PyPy",
+USER ]
+USER dependencies = []
+USER 
+USER [project.urls]
+USER Documentation = "https://github.com/jkassemi/friendly_names#readme"
+USER Issues = "https://github.com/jkassemi/friendly_names/issues"
+USER Source = "https://github.com/jkassemi/friendly_names"
+USER 
+USER [tool.hatch.version]
+USER path = "src/friendly_names/__about__.py"
+USER 
+USER [tool.hatch.envs.types]
+USER dependencies = [
+USER   "pytest>=7.0.0",
+USER ]
+USER extra-dependencies = [
+USER   "mypy>=1.0.0",
+USER ]
+USER [tool.hatch.envs.types.scripts]
+USER check = "mypy --install-types --non-interactive {args:src/friendly_names tests}"
+USER 
+USER [tool.hatch.envs.test]
+USER dependencies = [
+USER   "pytest>=7.0.0",
+USER   "pytest-cov>=4.0.0",
+USER ]
+USER 
+USER [tool.hatch.envs.test.scripts]
+USER test = "pytest {args:tests}"
+USER coverage = "pytest --cov {args:tests}"
+USER 
+USER [tool.coverage.run]
+USER source_pkgs = ["friendly_names", "tests"]
+USER branch = true
+USER parallel = true
+USER omit = [
+USER   "src/friendly_names/__about__.py",
+USER ]
+USER 
+USER [tool.coverage.paths]
+USER friendly_names = ["src/friendly_names", "*/friendly_names/src/friendly_names"]
+USER tests = ["tests", "*/friendly_names/tests"]
+USER 
+USER [tool.coverage.report]
+USER exclude_lines = [
+USER   "no cov",
+USER   "if __name__ == .__main__.:",
+USER   "if TYPE_CHECKING:",
+USER ]
+USER 
+USER [tool.hatch.envs.lint]
+USER dependencies = [
+USER   "black>=23.0.0",
+USER   "ruff>=0.1.0",
+USER ]
+USER 
+USER [tool.hatch.envs.lint.scripts]
+USER style = [
+USER   "ruff check {args:.}",
+USER   "ruff format --check {args:.}",
+USER ]
+USER fmt = [
+USER   "ruff check --fix {args:.}",
+USER   "ruff format {args:.}",
+USER ]
+USER 
+USER [tool.ruff]
+USER target-version = "py38"
+USER line-length = 88
+USER 
+USER [tool.ruff.lint]
+USER select = [
+USER   "A",    # flake8-builtins
+USER   "B",    # flake8-bugbear
+USER   "C",    # flake8-comprehensions
+USER   "E",    # pycodestyle errors
+USER   "F",    # pyflakes
+USER   "I",    # isort
+USER   "N",    # pep8-naming
+USER   "Q",    # flake8-quotes
+USER   "RUF",  # ruff-specific rules
+USER   "S",    # flake8-bandit
+USER   "T",    # flake8-print
+USER   "UP",   # pyupgrade
+USER   "W",    # pycodestyle warnings
+USER ]
+USER ignore = ["S101", "S311"]
+USER 
+USER [tool.ruff.format]
+USER quote-style = "double"
+USER indent-style = "space"
+USER skip-magic-trailing-comma = false
+USER line-ending = "lf"
+USER 
+USER [tool.ruff.lint.isort]
+USER known-first-party = ["friendly_names"]
+USER 
+USER [tool.ruff.lint.flake8-quotes]
+USER docstring-quotes = "double"
+USER inline-quotes = "double"
+USER ````
+USER 
+USER README.md
+USER ````
+USER # friendly_names
+USER 
+USER [![PyPI - Version](https://img.shields.io/pypi/v/friendly_names.svg)](https://pypi.org/project/friendly_names)
+USER [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/friendly_names.svg)](https://pypi.org/project/friendly_names)
+USER 
+USER A super simple random friendly name generator that creates readable, hyphenated names like "red-loop-bounty".
+USER 
+USER -----
+USER 
+USER ## Table of Contents
+USER 
+USER - [Installation](#installation)
+USER - [Usage](#usage)
+USER - [Development](#development)
+USER - [Release Process](#release-process)
+USER - [License](#license)
+USER 
+USER ## Installation
+USER 
+USER ```console
+USER pip install friendly_names
+USER ```
+USER 
+USER ## Usage
+USER 
+USER ```python
+USER import friendly_names
+USER 
+USER # Generate a friendly name like "red-loop-bounty"
+USER name = friendly_names.generate()
+USER 
+USER # Customize number of words
+USER name = friendly_names.generate(words=4)  # e.g., "happy-blue-running-fox"
+USER 
+USER # Use different separator
+USER name = friendly_names.generate(separator="_")  # e.g., "green_swift_river"
+USER ```
+USER 
+USER ## Development
+USER 
+USER To set up the development environment:
+USER 
+USER ```console
+USER pip install hatch
+USER ```
+USER 
+USER Common development tasks:
+USER 
+USER ```console
+USER # Run tests
+USER hatch run test:test
+USER 
+USER # Run tests with coverage
+USER hatch run test:coverage
+USER 
+USER # Run type checking
+USER hatch run types:check
+USER 
+USER # Check code style
+USER hatch run lint:style
+USER 
+USER # Format code
+USER hatch run lint:fmt
+USER ```
+USER 
+USER The project uses:
+USER - [Hatch](https://hatch.pypa.io/) for development environment and build management
+USER - [pytest](https://docs.pytest.org/) for testing
+USER - [mypy](https://mypy.readthedocs.io/) for type checking
+USER - [Ruff](https://docs.astral.sh/ruff/) for linting and formatting
+USER - [Black](https://black.readthedocs.io/) style rules (via Ruff)
+USER 
+USER ## Release Process
+USER 
+USER To release a new version:
+USER 
+USER 1. Update version in `src/friendly_names/__about__.py`
+USER 2. Commit the change:
+USER    ```console
+USER    git add src/friendly_names/__about__.py
+USER    git commit -m "Bump version to x.y.z"
+USER    ```
+USER 3. Tag the release:
+USER    ```console
+USER    git tag -a vx.y.z -m "Release version x.y.z"
+USER    ```
+USER 4. Push changes and tag:
+USER    ```console
+USER    git push origin master
+USER    git push origin vx.y.z
+USER    ```
+USER 
+USER The GitHub Actions workflow will automatically build and publish to PyPI when the tag is pushed.
+USER 
+USER ## License
+USER 
+USER `friendly_names` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+USER ````
+-------
+ASSISTANT Ok, any changes I propose will be to those files.
+-------
+USER Project description and sidebar
+USER 
+USER To set the 'friendly_names' description, author, links, classifiers, and other details for your next release, use the project metadata fields in your pyproject.toml file. Updating these fields will not change the metadata for past releases. Additionally, you must use Twine to upload your files in order to get full support for these fields. See the Python Packaging User Guide for more help. 
+-------
+ASSISTANT I'll help update the project metadata in pyproject.toml to include a better description and relevant details. I'll make the changes in a *SEARCH/REPLACE* block:
+ASSISTANT 
+ASSISTANT pyproject.toml
+ASSISTANT ```toml
+ASSISTANT <<<<<<< SEARCH
+ASSISTANT description = ''
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = []
+ASSISTANT =======
+ASSISTANT description = 'Generate friendly, readable names by combining adjectives, nouns and verbs'
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = ["names", "generator", "friendly", "readable"]
+ASSISTANT =======
+ASSISTANT >>>>>>> REPLACE
+ASSISTANT ```
+ASSISTANT 
+ASSISTANT This will:
+ASSISTANT 1. Add a clear description of what the package does
+ASSISTANT 2. Add relevant keywords for package discovery
+ASSISTANT 
+ASSISTANT Would you like me to make any other metadata updates to the pyproject.toml file? For example, we could:
+ASSISTANT - Add more classifiers to better categorize the package
+ASSISTANT - Update the development status if appropriate
+ASSISTANT - Add any additional project URLs
+ASSISTANT 
+ASSISTANT Let me know if you'd like any other changes!
+-------
+USER I added these files to the chat: README.md
+USER Let me know if there are others we should add.
+USER 
+USER # *SEARCH/REPLACE block* Rules:
+USER 
+USER Every *SEARCH/REPLACE block* must use this format:
+USER 1. The *FULL* file path alone on a line, verbatim. No bold asterisks, no quotes around it, no escaping of characters, etc.
+USER 2. The opening fence and code language, eg: ````python
+USER 3. The start of search block: <<<<<<< SEARCH
+USER 4. A contiguous chunk of lines to search for in the existing source code
+USER 5. The dividing line: =======
+USER 6. The lines to replace into the source code
+USER 7. The end of the replace block: >>>>>>> REPLACE
+USER 8. The closing fence: ````
+USER 
+USER Use the *FULL* file path, as shown to you by the user.
+USER 
+USER Every *SEARCH* section must *EXACTLY MATCH* the existing file content, character for character, including all comments, docstrings, etc.
+USER If the file contains code or other data wrapped/escaped in json/xml/quotes or other containers, you need to propose edits to the literal contents of the file, including the container markup.
+USER 
+USER *SEARCH/REPLACE* blocks will *only* replace the first match occurrence.
+USER Including multiple unique *SEARCH/REPLACE* blocks if needed.
+USER Include enough lines in each SEARCH section to uniquely match each set of lines that need to change.
+USER 
+USER Keep *SEARCH/REPLACE* blocks concise.
+USER Break large *SEARCH/REPLACE* blocks into a series of smaller blocks that each change a small portion of the file.
+USER Include just the changing lines, and a few surrounding lines if needed for uniqueness.
+USER Do not include long runs of unchanging lines in *SEARCH/REPLACE* blocks.
+USER 
+USER Only create *SEARCH/REPLACE* blocks for files that the user has added to the chat!
+USER 
+USER To move code within a file, use 2 *SEARCH/REPLACE* blocks: 1 to delete it from its current location, 1 to insert it in the new location.
+USER 
+USER Pay attention to which filenames the user wants you to edit, especially if they are asking you to create a new file.
+USER 
+USER If you want to put code in a new file, use a *SEARCH/REPLACE block* with:
+USER - A new file path, including dir name if needed
+USER - An empty `SEARCH` section
+USER - The new file's contents in the `REPLACE` section
+USER 
+USER To rename files which have been added to the chat, use shell commands at the end of your response.
+USER 
+USER If the user just says something like "ok" or "go ahead" or "do that" they probably want you to make SEARCH/REPLACE blocks for the code changes you just proposed.
+USER The user will say when they've applied your edits. If they haven't explicitly confirmed the edits have been applied, they probably want proper SEARCH/REPLACE blocks.
+USER 
+USER 
+USER ONLY EVER RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+USER 
+USER Examples of when to suggest shell commands:
+USER 
+USER - If you changed a self-contained html file, suggest an OS-appropriate command to open a browser to view it to see the updated content.
+USER - If you changed a CLI program, suggest the command to run it to see the new behavior.
+USER - If you added a test, suggest how to run it with the testing tool used by the project.
+USER - Suggest OS-appropriate commands to delete or rename files/directories, or other file system operations.
+USER - If your code changes add new dependencies, suggest the command to install them.
+USER - Etc.
+USER 
+LLM RESPONSE 2025-01-31T15:25:58
+ASSISTANT Let me fix my previous SEARCH/REPLACE block to follow the correct format:
+ASSISTANT 
+ASSISTANT pyproject.toml
+ASSISTANT ````toml
+ASSISTANT <<<<<<< SEARCH
+ASSISTANT description = ''
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = []
+ASSISTANT =======
+ASSISTANT description = 'Generate friendly, readable names by combining adjectives, nouns and verbs'
+ASSISTANT readme = "README.md"
+ASSISTANT requires-python = ">=3.8"
+ASSISTANT license = "MIT"
+ASSISTANT keywords = ["names", "generator", "friendly", "readable"]
+ASSISTANT >>>>>>> REPLACE
+ASSISTANT ````
+ASSISTANT 
+ASSISTANT I'd also like to enhance the project classifiers to better describe the package. Here's another SEARCH/REPLACE block:
+ASSISTANT 
+ASSISTANT pyproject.toml
+ASSISTANT ````toml
+ASSISTANT <<<<<<< SEARCH
+ASSISTANT classifiers = [
+ASSISTANT   "Development Status :: 4 - Beta",
+ASSISTANT   "Programming Language :: Python",
+ASSISTANT   "Programming Language :: Python :: 3.8",
+ASSISTANT   "Programming Language :: Python :: 3.9",
+ASSISTANT   "Programming Language :: Python :: 3.10",
+ASSISTANT   "Programming Language :: Python :: 3.11",
+ASSISTANT   "Programming Language :: Python :: 3.12",
+ASSISTANT   "Programming Language :: Python :: Implementation :: CPython",
+ASSISTANT   "Programming Language :: Python :: Implementation :: PyPy",
+ASSISTANT ]
+ASSISTANT =======
+ASSISTANT classifiers = [
+ASSISTANT   "Development Status :: 4 - Beta",
+ASSISTANT   "Programming Language :: Python",
+ASSISTANT   "Programming Language :: Python :: 3.8",
+ASSISTANT   "Programming Language :: Python :: 3.9",
+ASSISTANT   "Programming Language :: Python :: 3.10",
+ASSISTANT   "Programming Language :: Python :: 3.11",
+ASSISTANT   "Programming Language :: Python :: 3.12",
+ASSISTANT   "Programming Language :: Python :: Implementation :: CPython",
+ASSISTANT   "Programming Language :: Python :: Implementation :: PyPy",
+ASSISTANT   "Intended Audience :: Developers",
+ASSISTANT   "Topic :: Software Development :: Libraries :: Python Modules",
+ASSISTANT   "Topic :: Text Processing :: General",
+ASSISTANT   "Topic :: Utilities"
+ASSISTANT ]
+ASSISTANT >>>>>>> REPLACE
+ASSISTANT ````
+ASSISTANT 
+ASSISTANT These changes will:
+ASSISTANT 1. Add a descriptive package summary
+ASSISTANT 2. Add relevant keywords for package discovery
+ASSISTANT 3. Add appropriate trove classifiers to better categorize the package
+ASSISTANT 
+ASSISTANT Let me know if you'd like any adjustments to these changes!
