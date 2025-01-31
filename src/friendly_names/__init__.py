@@ -44,14 +44,14 @@ def generate(words: int = 3, separator: str = "-") -> str:
         raise ValueError("words must be at least 1")
 
     name_parts = []
-    
+
     # First word is always an adjective
     name_parts.append(random.choice(ADJECTIVES))
-    
+
     # Middle words (if any) are verbs
     for _ in range(max(0, words - 2)):
         name_parts.append(random.choice(VERBS))
-    
+
     # Last word is always a noun
     if words > 1:
         name_parts.append(random.choice(NOUNS))
