@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: MIT
 
 import random
-from typing import Optional
 
 # Word lists for generating names
 ADJECTIVES = [
