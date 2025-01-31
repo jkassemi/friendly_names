@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import random
+
 from .adjectives import ADJECTIVES
 from .nouns import NOUNS
 from .verbs import VERBS
