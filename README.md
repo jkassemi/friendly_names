@@ -1,7 +1,7 @@
 # friendly_names
 
-[![PyPI - Version](https://img.shields.io/pypi/v/friendly-names.svg)](https://pypi.org/project/friendly-names)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/friendly-names.svg)](https://pypi.org/project/friendly-names)
+[![PyPI - Version](https://img.shields.io/pypi/v/friendly_names.svg)](https://pypi.org/project/friendly_names)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/friendly_names.svg)](https://pypi.org/project/friendly_names)
 
 A super simple random friendly name generator that creates readable, hyphenated names like "red-loop-bounty".
 
