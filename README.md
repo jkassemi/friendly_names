@@ -11,6 +11,7 @@ A super simple random friendly name generator that creates readable, hyphenated 
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Development](#development)
 - [License](#license)
 
 ## Installation
@@ -33,6 +34,32 @@ name = friendly_names.generate(words=4)  # e.g., "happy-blue-running-fox"
 # Use different separator
 name = friendly_names.generate(separator="_")  # e.g., "green_swift_river"
 ```
+
+## Development
+
+To set up the development environment:
+
+```console
+pip install hatch
+```
+
+Common development tasks:
+
+```console
+# Run tests
+hatch run test:test
+
+# Run tests with coverage
+hatch run test:coverage
+
+# Run type checking
+hatch run types:check
+```
+
+The project uses:
+- [Hatch](https://hatch.pypa.io/) for development environment and build management
+- [pytest](https://docs.pytest.org/) for testing
+- [mypy](https://mypy.readthedocs.io/) for type checking
 
 ## License
 
