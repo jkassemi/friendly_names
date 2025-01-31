@@ -60,6 +60,7 @@ VERBS = [
     "diving",
 ]
 
+
 def generate(words: int = 3, separator: str = "-") -> str:
     """
     Generate a friendly random name.
