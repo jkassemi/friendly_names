@@ -3,62 +3,9 @@
 # SPDX-License-Identifier: MIT
 
 import random
-
-# Word lists for generating names
-ADJECTIVES = [
-    "red",
-    "blue",
-    "green",
-    "swift",
-    "happy",
-    "bright",
-    "wild",
-    "calm",
-    "bold",
-    "soft",
-    "warm",
-    "cool",
-    "quick",
-    "quiet",
-    "brave",
-    "wise",
-]
-
-NOUNS = [
-    "river",
-    "mountain",
-    "star",
-    "cloud",
-    "tree",
-    "bird",
-    "wind",
-    "sun",
-    "moon",
-    "lake",
-    "forest",
-    "meadow",
-    "ocean",
-    "valley",
-    "flower",
-    "storm",
-]
-
-VERBS = [
-    "running",
-    "flying",
-    "dancing",
-    "singing",
-    "flowing",
-    "glowing",
-    "rising",
-    "falling",
-    "jumping",
-    "spinning",
-    "floating",
-    "drifting",
-    "soaring",
-    "diving",
-]
+from .adjectives import ADJECTIVES
+from .nouns import NOUNS
+from .verbs import VERBS
 
 
 def generate(words: int = 3, separator: str = "-") -> str:
