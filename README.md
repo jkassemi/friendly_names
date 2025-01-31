@@ -12,6 +12,7 @@ A super simple random friendly name generator that creates readable, hyphenated 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Development](#development)
+- [Release Process](#release-process)
 - [License](#license)
 
 ## Installation
@@ -68,6 +69,28 @@ The project uses:
 - [mypy](https://mypy.readthedocs.io/) for type checking
 - [Ruff](https://docs.astral.sh/ruff/) for linting and formatting
 - [Black](https://black.readthedocs.io/) style rules (via Ruff)
+
+## Release Process
+
+To release a new version:
+
+1. Update version in `src/friendly_names/__about__.py`
+2. Commit the change:
+   ```console
+   git add src/friendly_names/__about__.py
+   git commit -m "Bump version to x.y.z"
+   ```
+3. Tag the release:
+   ```console
+   git tag -a vx.y.z -m "Release version x.y.z"
+   ```
+4. Push changes and tag:
+   ```console
+   git push origin master
+   git push origin vx.y.z
+   ```
+
+The GitHub Actions workflow will automatically build and publish to PyPI when the tag is pushed.
 
 ## License
 
