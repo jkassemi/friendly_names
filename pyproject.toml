@@ -35,6 +35,9 @@ Source = "https://github.com/jkassemi/friendly_names"
 path = "src/friendly_names/__about__.py"
 
 [tool.hatch.envs.types]
+dependencies = [
+  "pytest>=7.0.0",
+]
 extra-dependencies = [
   "mypy>=1.0.0",
 ]
