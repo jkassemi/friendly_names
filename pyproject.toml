@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 [project]
 name = "friendly_names"
 dynamic = ["version"]
-description = ''
+description = 'Generate friendly, readable names by combining adjectives, nouns and verbs'
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = []
+keywords = ["names", "generator", "friendly", "readable"]
 authors = [
   { name = "James Kassemi", email = "james@kassemi.org" },
 ]
@@ -23,6 +23,10 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Text Processing :: General",
+  "Topic :: Utilities"
 ]
 dependencies = []
 
