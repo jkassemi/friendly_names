@@ -6,18 +6,58 @@ import random
 
 # Word lists for generating names
 ADJECTIVES = [
-    "red", "blue", "green", "swift", "happy", "bright", "wild", "calm",
-    "bold", "soft", "warm", "cool", "quick", "quiet", "brave", "wise"
+    "red",
+    "blue",
+    "green",
+    "swift",
+    "happy",
+    "bright",
+    "wild",
+    "calm",
+    "bold",
+    "soft",
+    "warm",
+    "cool",
+    "quick",
+    "quiet",
+    "brave",
+    "wise",
 ]
 
 NOUNS = [
-    "river", "mountain", "star", "cloud", "tree", "bird", "wind", "sun",
-    "moon", "lake", "forest", "meadow", "ocean", "valley", "flower", "storm"
+    "river",
+    "mountain",
+    "star",
+    "cloud",
+    "tree",
+    "bird",
+    "wind",
+    "sun",
+    "moon",
+    "lake",
+    "forest",
+    "meadow",
+    "ocean",
+    "valley",
+    "flower",
+    "storm",
 ]
 
 VERBS = [
-    "running", "flying", "dancing", "singing", "flowing", "glowing", "rising",
-    "falling", "jumping", "spinning", "floating", "drifting", "soaring", "diving"
+    "running",
+    "flying",
+    "dancing",
+    "singing",
+    "flowing",
+    "glowing",
+    "rising",
+    "falling",
+    "jumping",
+    "spinning",
+    "floating",
+    "drifting",
+    "soaring",
+    "diving",
 ]
 
 def generate(words: int = 3, separator: str = "-") -> str:
